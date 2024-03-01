@@ -1,0 +1,15 @@
+  name: Fetch Data to File
+  on:
+    schedule:
+      - cron: "*/5 * * * *"
+  jobs:
+    refresh-feed:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Fetch API Data
+          uses: JamesIves/fetch-api-data-action@v2.4.0
+          with:
+            # The URL of the endpoint you would like to retrieve data from.
+            endpoint: https://api.live.prod.thehelldiversgame.com/api/WarSeason/801/Status
+            # By default the save location of the JSON file is `fetch-api-data-action/data.json`, if you would like to override the directory you can do so by specifying a new one with this variable.
+            save-location: warStatus.json

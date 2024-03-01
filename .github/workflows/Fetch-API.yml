@@ -7,18 +7,16 @@
     refresh-feed:
       runs-on: ubuntu-latest
       steps:
-        - name: Fetch API Data
-          uses: JamesIves/fetch-api-data-action@v2.4.0
-          with:
-            # The URL of the endpoint you would like to retrieve data from.
-            endpoint: https://api.live.prod.thehelldiversgame.com/api/WarSeason/801/Status
-            # By default the save location of the JSON file is `fetch-api-data-action/data.json`, if you would like to override the directory you can do so by specifying a new one with this variable.
-            save-location: warStatus
-            branch: master
-            
-        - name: Update resources
-          uses: test-room-7/action-update-file@v1
-          with:
-            file-path: warStatus/data.json
-            commit-msg: Updated War Status data 
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      
+      - name: Fetch JSON Data
+        id: fetchdata
+        run: |
+          curl -o warStatus.json https://api.example.com/data
+          
+      - name: Commit and Push if Changed
+        run: |
+          git add warStatus.json
+          git commit -m "Update War Status JSON data" || echo "No changes to commit"
+          git push

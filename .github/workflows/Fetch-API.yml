@@ -15,7 +15,7 @@
       - name: Fetch JSON Data
         id: fetchdata
         run: |
-          curl -o warStatus.json https://api.live.prod.thehelldiversgame.com/api/WarSeason/801/Status
+          curl -o warStatus.json https://api.live.prod.thehelldiversgame.com/api/WarSeason/801/Status -h "Accept-Language: en-US,en;q=0.5"
           
       - name: Commit and Push if Changed
         run: |

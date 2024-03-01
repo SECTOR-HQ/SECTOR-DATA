@@ -14,3 +14,11 @@
             endpoint: https://api.live.prod.thehelldiversgame.com/api/WarSeason/801/Status
             # By default the save location of the JSON file is `fetch-api-data-action/data.json`, if you would like to override the directory you can do so by specifying a new one with this variable.
             save-location: warStatus
+            branch: master
+            
+        - name: Update resources
+          uses: test-room-7/action-update-file@v1
+          with:
+            file-path: warStatus/data.json
+            commit-msg: Updated War Status data 
+            github-token: ${{ secrets.GITHUB_TOKEN }}
